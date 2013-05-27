@@ -1,0 +1,18 @@
+Practice 1:
+	使用mybatis实现类com.demo.mybatis.practice.system.user.DefaultUserAccessor
+
+Practice 2:
+	结合Spring，实现User信息的HTTP维护接口
+
+	GET 	 /user/{key}/{value} => /user/name/frank
+
+	POST /user/~/~ =>
+	{
+		"name":xx
+		"lastLoginTime":yy
+	}
+
+	PUT  /user/~/~
+	{
+		"lastLoginTime":xx
+	}

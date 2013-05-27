@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	
+    <select id="select"
+            parameterType="java.util.HashMap"
+            resultType="com.demo.mybatis.sample.bean.User">
+        <![CDATA[
+            select
+                id,
+                name,
+                role,
+                last_login_time as lastLoginTime
+            from 
+                users
+        ]]>
+        <where>
+            <if test="name !=null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="role != null">
+            		and role=#{role}
+            </if>
+            <if test="id != null">
+            		and id = #{id}
+            </if>
+        </where>
+    </select>
+    
+    <!-- selectCount -->
+
+    <insert id="insert"
+    			parameterType="com.demo.mybatis.sample.bean.User"
+            keyProperty="id">
+        <![CDATA[
+            insert into users (
+                name,
+                role
+            ) values (
+                #{name},
+                #{role}
+            )
+        ]]>
+    </insert>
+    
+    <!-- batchInsert -->
+
+    <update id="update"
+            parameterType="java.util.HashMap">
+            update
+                users
+            <set>
+                <if test="name != null and name != ''">
+                    name = #{name},
+                </if>
+                <if test="lastLoginTime != null">
+                    last_login_time = #{lastLoginTime},
+                </if>
+            </set>
+            <!-- no <where> only if you need to update many records -->
+            where
+                id=#{id}
+    </update>
+	
+    <delete id="delete"
+            parameterType="java.util.HashMap">
+        <![CDATA[
+            delete from
+                users
+        ]]>
+        <where>
+            <if test="id != null and id != ''">
+                and id=#{id}
+            </if>
+        </where>
+    </delete>
+</mapper>
