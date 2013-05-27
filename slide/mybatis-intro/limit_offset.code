@@ -1,0 +1,10 @@
+<E> List<E> selectList(
+        String statement,
+        Object parameter,
+        RowBounds rowBounds)
+
+RowBounds bounds = new RowBounds(0, 1000);
+List<User> users = sqlSession.selectList(
+        "user.select",
+        null,
+        rowBounds);

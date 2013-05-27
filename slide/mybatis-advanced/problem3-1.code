@@ -1,0 +1,20 @@
+<resultMap type="xxx.xxx.User" id="userResultMap">
+    <result property="meta" column="meta"
+            typeHandler="xxx.xxx.PGHStoreTypeHandler">
+</resultMap>
+
+<select id="getUser"
+        parameterType="java.util.HashMap"
+        resultMap="userResultMap">
+    <![CDATA[
+        select name, meta from users
+    ]]
+</select>
+
+Map<String, Object> param = new HashMap<String, Object>();
+param.put("name", "alice");
+
+User user = session.selectOne("user.getUser", param, User.class);
+Map<String, Object> meta = user.getMeta();
+
+String color = meta.get("hairColor");

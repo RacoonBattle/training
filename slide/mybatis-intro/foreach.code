@@ -1,0 +1,13 @@
+<insert id="batchInsert"
+        parameterType="java.util.List"
+        useGeneratedKeys="true"
+        keyProperty="id">
+    <![CDATA[
+        insert into users (
+           name
+        ) values
+    ]]>
+    <foreach collection="list" item="item" index="idx" separator=",">
+         (#{item.name})
+    </foreach>
+</insert>

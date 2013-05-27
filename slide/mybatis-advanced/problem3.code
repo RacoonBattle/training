@@ -1,0 +1,15 @@
+public class PGHStoreTypeHandler
+        implements TypeHandler<Map> {
+
+    public void setParameter(PreparedStatement ps, int i,
+           Map parameter, JdbcType type) throws SQLException {
+        ps.setObject(i, new PGHStore(parameter));
+    }
+
+    public Map getResult(ResultSet rs, String columnName)
+           throws SQLException {
+      return (PGHStore) rs.getObject(columnName);
+  }
+
+  ...
+}

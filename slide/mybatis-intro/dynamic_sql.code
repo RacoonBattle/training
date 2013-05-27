@@ -1,0 +1,18 @@
+<![CDATA[
+    select
+        id,
+        name,
+        last_login_time as lastLoginTime
+    from
+        users
+]]>
+<where>
+    <if test="name != null and name != ''">
+        and name = #{name}
+    </if>
+</where>
+
+param.put("name", "alice")
+User user = sqlSession.selectOne("user.select", param);
+
+List<User> users = sqlSession.selectList("user.select");

@@ -1,0 +1,16 @@
+package com.traing.mybatis.practice.system.user;
+
+public interface UserAccessor {
+
+    void insertUser(user user);
+
+    User getUser(int id);
+
+    User getUser(String name);
+
+    void updateUser(User user);
+
+    void deleteUser(int id);
+
+    void deleteUsers(int[] ids);
+}

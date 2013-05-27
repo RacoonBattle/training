@@ -1,0 +1,216 @@
+% Mybatis 基础篇
+% 
+% zzy.hit@gmail.com
+% 2013/05/24
+
+\documentclass[xcolor=dvipsnames]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{items}[circle]
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\usepackage{CJKutf8}
+\usepackage{verbatim}
+
+\title{Introduction to Mybatis}
+\author{zzy.hit@gmail.com}
+\date{\today}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+
+  % title page 
+  \frame{\titlepage}
+
+  \frame{\frametitle{概要}
+    \begin{itemize}
+    \item Mybatis简介
+    \item 基础使用
+      \begin{itemize}
+      \item SQL配置文件
+      \item 动态SQL
+      \item 接口方式
+      \end{itemize}
+    \item 扩展使用
+      \begin{itemize}
+      \item TypeHandler
+      \item Plugins
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \frame{\frametitle{目标}
+    \begin{itemize}
+    \item 能够编写SQL配置文件
+    \item 能够使用动态SQL
+    \item 能够编写TypeHandler
+    \item 了解ResultHandler, Interceptor, Executor
+    \end{itemize}
+  }
+
+
+  \bgroup
+  \usenavigationsymbolstemplate{}
+  \frame[plain]{
+    \begin{center}
+      (那是什么)
+    \end{center}
+  }
+  \egroup
+
+  \frame{\frametitle{起源}
+    \begin{itemize}
+    \item ORM (Object Relational Mapping)
+    \item iBatis → 2010/06/16 → MyBatis
+    \item http://code.google.com/p/mybatis
+    \end{itemize}
+  }
+
+  \bgroup
+  \usenavigationsymbolstemplate{}
+  \frame[plain]{
+    \begin{center}
+      (生而为何)
+    \end{center}
+  }
+  \egroup
+
+  \frame{\frametitle{从JDBC说起}
+    \begin{itemize}
+    \item java.sql.Driver
+    \item java.sql.Connection
+    \item java.sql.Statement
+    \item java.sql.ResultSet
+    \item java.sql.SavePoint
+    \end{itemize}
+  }
+
+  \frame{\frametitle{读取数据七步}
+    \begin{itemize}
+%      \pause
+    \item 参数检查
+%      \pause
+    \item 获取数据连接
+%      \pause
+    \item 查询准备
+%      \pause
+    \item 绑定参数
+%      \pause
+    \item 执行查询
+%      \pause
+    \item 绑定结果
+%      \pause
+    \item 释放资源
+    \end{itemize}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      (using JDBC)
+    \end{center}
+  }
+    
+  \frame{\frametitle{观察vs 抽象}
+    \begin{itemize}
+    \item 数据归类
+    \item 行为归接口
+    \item 披着接口的抽象类实现
+    \item Sigleton? (Never do this!!)
+    \end{itemize}
+  }
+
+  \frame{\frametitle{观察变化点}
+    \verbatiminput{../pattern1.code}
+  }
+
+  \frame{\frametitle{为什么痛苦}
+    \begin{itemize}
+    \item import java.sql.SQLException
+    \item if (id!=null) { where.append(id=?) }
+    \item DAO with business logic.
+    \end{itemize}
+  }
+
+  \frame{\frametitle{我们真正需要什么}
+    \begin{itemize}
+    \item SQL是一种可重用的逻辑资源
+    \item Query
+      \begin{itemize}
+        \item 参数
+        \item 结果(单个/多个)
+      \end{itemize}
+    \item Update
+      \begin{itemize}
+      \item 参数
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \frame{
+    \verbatiminput{../pattern2.code}
+  }
+
+  \frame[plain]{
+    \begin{block}{Google}
+      肯定有人遇到过同样的问题，并已经解决
+    \end{block}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      (using MyBatis)
+    \end{center}
+  }
+
+  \frame{\frametitle{MyBatis}
+    \begin{itemize}
+    \item SQL配置文件(id为资源标识)
+    \item SqlSession(统一访问行为)
+    \item Dynamic SQL(重用逻辑片段)
+    \end{itemize}
+  }
+
+  \frame{\frametitle{自增主键}
+    \verbatiminput{../auto_increment.code}
+  }
+
+  \frame{\frametitle{Dynamic SQL}
+    \verbatiminput{../dynamic_sql.code}
+  }
+
+  \frame{\frametitle{foreach}
+    \verbatiminput{../foreach.code}
+  }
+
+  \frame{\frametitle{limit vs offset}
+    \verbatiminput{../limit_offset.code}
+  }
+
+  \frame{\frametitle{typeHandler}
+    \verbatiminput{../typehandler.code}
+  }
+
+  \frame{\frametitle{一些例子}
+    \begin{itemize}
+      \item IntegerTypeHandler
+      \item StringTypeHandler
+      \item EnumTypeHandler
+      \item ArrayTypeHandler
+    \end{itemize}
+  }
+
+  \frame{\frametitle{ResultHandler}
+    \verbatiminput{../result_handler.code}
+  }
+
+  \frame{\frametitle{Homework}
+    \verbatiminput{../homework.code}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      -EOF-
+    \end{center}
+  }
+\end{CJK}
+\end{document}

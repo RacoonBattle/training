@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+
+    <bean id="passwordFilter" class="com.demo.spring.security.filter.PasswordSecurityFilter" />
+    <bean id="accountAccessor" class="com.demo.spring.security.account.MappedAccountAccessor" init-method="init" destroy-method="dispose">
+        <property name="accountMap" ref="accountMap" />
+        <property name="passwordFilter" ref="passwordFilter" />
+    </bean>
+
+
+    <bean id="accountAccessor" class="com.demo.spring.security.account.MappedAccountAccessor" init-method="init" destroy-method="dispose">
+        <property name="passwordFilter" ref="passwordFilter" />
+    </bean>
+    
+    <bean id="created" class="java.util.Date" />
+
+    <bean id="alice" class="com.demo.spring.security.account.Account">
+        <property name="name" value="alice" />
+        <property name="password" value="123456" />
+        <property name="created" ref="created" />
+    </bean>
+
+    <util:map id="accountMap">
+        <entry key="alice" value-ref="alice" />
+    </util:map>
+</beans>

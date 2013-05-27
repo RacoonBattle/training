@@ -1,0 +1,132 @@
+% Mybatis 提高篇
+% 
+% zzy.hit@gmail.com
+% 2013/05/24
+
+\documentclass[xcolor=dvipsnames]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{items}[circle]
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\usepackage{CJKutf8}
+\usepackage{verbatim}
+
+\title{Advanced Mybatis}
+\author{zzy.hit@gmail.com}
+\date{\today}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+
+  % title page 
+  \frame{\titlepage}
+
+  \frame{\frametitle{概要}
+    \begin{itemize}
+    \item 使用Spring
+    \item 善用动态SQL
+    \item 常见问题
+    \item 通用案例
+    \end{itemize}
+  }
+
+  \frame{\frametitle{目标}
+    \begin{itemize}
+    \item 结合Spring实现HTTP数据访问接口
+    \end{itemize}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      引入Spring
+    \end{center}
+  }
+
+  \frame{\frametitle{基础配置}
+    \begin{itemize}
+    \item spring/dao.xml
+    \item mybatis-config.xml
+    \item mapper/xxx.xml
+    \end{itemize}
+  }
+
+  \frame{\frametitle{dao.xml}
+    \verbatiminput{../dao.xml}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      (物尽其用 OGNL)
+    \end{center}
+  }
+
+  \frame[plain]{
+    \verbatiminput{../ognl-select.xml}
+  }
+
+  \frame[plain]{
+    \verbatiminput{../ognl-update.xml}
+  }
+
+  \frame{\frametitle{满足大多数场景}
+    \begin{itemize}
+    \item select
+    \item selectCount
+    \item insert(batchInsert)
+    \item update
+    \item delete
+    \end{itemize}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      常见问题
+    \end{center}
+  }
+
+  \frame{\frametitle{常见问题}
+    当id=0时，下列表达式=?
+    \verbatiminput{../problem1.code}
+  }
+
+  \frame{\frametitle{limit vs offset}
+    FastResultSetHandler中如下方法:
+    \verbatiminput{../problem2.code}
+  }
+
+  \frame{\frametitle{PostgreSQL(hstore)}
+
+    classpath:org/postgresql/driverconfig.properties
+    datatype.hstore=org.postgresql.util.PGHStore
+
+    http://archives.postgresql.org/pgsql-jdbc/2009-12/msg00037.php
+    \verbatiminput{../problem3.code}
+  }
+
+  \frame[plain]{
+    \verbatiminput{../problem3-1.code}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      通用案例
+    \end{center}
+  }
+
+  \frame{\frametitle{Homework}
+    \begin{itemize}
+      \item GET /=/view/user/~/~
+      \item GET /=/view/user/name/{name}
+      \item POST /=/model/user/~/~
+      \item PUT /=/model/user/id/{id}
+    \end{itemize}
+  }
+
+  \frame[plain]{
+    \begin{center}
+      -EOF-
+    \end{center}
+  }
+\end{CJK}
+\end{document}

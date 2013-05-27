@@ -1,0 +1,11 @@
+void select(String statement, ResultHandler handler);
+
+final MailSender sender = xxx;
+sqlSession.select("user.select", new ResultHandler() {
+
+    public void handleResult(ResultContext context) {
+        Object user = context.getResultObject();
+
+        sender.send(user);
+    }
+});
