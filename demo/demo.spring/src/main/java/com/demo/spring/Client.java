@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.demo.spring.security.account.Account;
-import com.demo.spring.security.account.AccountAccessor;
-import com.demo.spring.security.account.MappedAccountAccessor;
+import com.demo.spring.system.security.account.Account;
+import com.demo.spring.system.security.account.AccountAccessor;
+import com.demo.spring.system.security.account.MappedAccountAccessor;
 
 public class Client {
 

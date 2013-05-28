@@ -17,7 +17,7 @@
 \date{\today}
 
 \begin{document}
-\begin{CJK}{UTF8}{gbsn}
+\begin{CJK}{UTF8}{gkai}
 
 
   % title page 
@@ -26,10 +26,10 @@
   % outline
   \frame{\frametitle{Outline}
     \begin{itemize}
-      \item IoC - Inversion of Control
-      \item Spring简介
-      \item Spring入门
-      \item AOP - Aspect-Oriented Programming
+    \item IoC - Inversion of Control
+    \item Spring简介
+    \item Spring入门
+    \item AOP - Aspect-Oriented Programming
     \end{itemize}
   }
 
@@ -41,10 +41,10 @@
   }
 
   \frame{\frametitle{IoC (Inversion of Control)}
-    \begin{theorem}
+    \begin{block}{定律一}
       高层不应依赖低层，模块都必须抽象
-    \end{theorem}
-    \verbatiminput{ioc1.c}
+    \end{block}
+    \verbatiminput{../ioc1.c}
     \pause
     \textcolor{red}{now, save to database?}
     \pause
@@ -55,25 +55,31 @@
   }
 
   \frame{\frametitle{IoC (Inversion of Control)}
-    \begin{theorem}
+    \begin{block}{定律二}
       实现必须依赖抽象，而不是抽象依赖实现
-    \end{theorem}
-    \verbatiminput{ioc2_1.java}
+    \end{block}
+    \verbatiminput{../ioc2_1.java}
     \pause
     \textcolor{red}{now, save to database?}
   }
 
   \frame{\frametitle{IoC (Inversion of Control)}
-    \verbatiminput{ioc2_2.java}
+    \verbatiminput{../ioc2_2.java}
     \pause
     \textcolor{red}{FileWriter? DatabaseWriter? NetWriter? CompositeWriter...}
   }
 
+  \frame{\frametitle{Ioc (Inversion of Control)}
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{../inversion-of-control.png}
+    \end{center}
+  }
+
   \frame{\frametitle{IoC (Inversion of Control)}
     
-    \begin{theorem}
+    \begin{block}{定律三}
       应用不应依赖容器，容器应服务于应用
-    \end{theorem}
+    \end{block}
 
     \begin{itemize}
     \item 业务逻辑不做修改可迁移
@@ -81,20 +87,20 @@
     \end{itemize}
 
     \begin{center}
-      \includegraphics[width=0.3\textwidth]{spring_logo_mini.png}
-      \includegraphics[width=0.3\textwidth]{pico_container_logo.png}
+      \includegraphics[width=0.3\textwidth]{../spring_logo_mini.png}
+      \includegraphics[width=0.3\textwidth]{../pico_container_logo.png}
 
-      \includegraphics[width=0.3\textwidth]{seasar_logo_blue.png}
-      \includegraphics[width=0.3\textwidth]{guice_logo.png}
+      \includegraphics[width=0.3\textwidth]{../seasar_logo_blue.png}
+      \includegraphics[width=0.3\textwidth]{../guice_logo.png}
     \end{center}
   }
 
   % uncle bob
   \frame{\frametitle{Questions?}
     \begin{center}
-      \includegraphics[width=0.8\textwidth]{uncle_bob.jpg}
+      \includegraphics[width=0.8\textwidth]{../uncle_bob.jpg}
 
-      \href{http://www.objectmentor.com/resources/articles/dip.pdf}{The Dependency Inversion Principle}
+      \href{http://www.objectmentor.com/resources/articles/dip.pdf}{The Dependency Inversion Principle} - Uncle Bob
 
     \end{center}
   }
@@ -102,14 +108,14 @@
   % Sample
   \frame{\frametitle{举个例子}
     \begin{center}
-      \includegraphics[width=0.8\textwidth]{sample.jpg}
+      \includegraphics[width=0.8\textwidth]{../sample.jpg}
     \end{center}
   }
 
   % spring
   \frame{
     \begin{center}
-      \includegraphics[width=0.5\textwidth]{spring_logo.png}
+      \includegraphics[width=0.5\textwidth]{../spring_logo.png}
     \end{center}
   }
 
@@ -147,65 +153,85 @@
 
   \frame{\frametitle{Spring Framework}
     \begin{center}
-      \includegraphics[width=0.9\textwidth]{spring_framework.png}
+      \includegraphics[width=0.9\textwidth]{../spring_framework.png}
     \end{center}
   }
 
   \frame{\frametitle{工作方式}
     \begin{center}
-      \includegraphics[width=0.8\textwidth]{spring_container.png}
+      \includegraphics[width=0.8\textwidth]{../spring_container.png}
     \end{center}
   }
 
   % Pack app using Spring
   \frame{\frametitle{配置 - Bean定义}
     \begin{itemize}
-      \item id/name, class,
-      \item constructor-arg, properties, value/ref/value-ref
-      \item abstract/parent
+    \item id/name, class
+    \item constructor-arg, properties, value/ref/value-ref
+    \item abstract/parent
     \end{itemize}
   }
 
   % factory/builder
   \frame{\frametitle{BeanFactory}
-    XmlBeanFactory
+    \begin{itemize}
+    \item getBean(String):Object
+    \item getBean(String, Class):T
+    \item getBean(Class):T
+    \item getBean(String, Object...):Object
+    \item containsBean(String):boolean
+    \item isSingleton(String):boolean
+    \item isPrototype(String):boolean
+    \item isTypeMatch(String, Class):boolean
+    \item getType(String):Class
+    \item getAliases(String):String[]
+    \end{itemize}
   }
 
   % 
   \frame{\frametitle{LifeCycle}
     \begin{itemize}
-      \item init-method - InitializingBean
-      \item destroy-method - DisposableBean
-      \item lazy-init
+    \item init-method - InitializingBean
+    \item destroy-method - DisposableBean
+    \item lazy-init
     \end{itemize}
   }
 
   \frame{\frametitle{FactoryBean}
-    factory-bean, factory-method
-  }
-
-  % (util:list/map/properties)
-
-  \frame{\frametitle{ApplicationContext}
-
-    \begin{center}
-      \includegraphics[width=1.0\textwidth]{beanfactory.jpg}
-    \end{center}
+    \begin{itemize}
+    \item getObject():T
+    \item getObjectType():Class
+    \item isSingleton():boolean
+    \item factory-bean / factory-method
+    \end{itemize}
   }
 
   \frame{\frametitle{Scope}
     scope(sigleton/prototype/request/session/global),
   }
 
-  \frame{\frametitle{Annotation}
-    \begin{itemize}
-      \item what is annotation
-      \item @Service, @Resource(Autowired)
-    \end{itemize}
+  % (util:list/map/properties)
+
+  \frame{\frametitle{ApplicationContext}
+    \begin{center}
+      \includegraphics[width=1.0\textwidth]{../beanfactory.jpg}
+    \end{center}
   }
 
-  \frame{\frametitle{Configuration (xml vs annotation)}
-
+  \frame{\frametitle{Annotation - 代码即配置}
+    \begin{itemize}
+    \item what is annotation
+    \item @Service
+      \begin{itemize}
+      \item value:String
+      \end{itemize}
+    \item @Resource(Autowired)
+      \begin{itemize}
+      \item name:String
+      \item type:Class
+      \end{itemize}
+    \item xml vs annotation
+    \end{itemize}
   }
 
   % AOP
@@ -215,32 +241,55 @@
     \end{center}
   }
 
-  % Aspect (Big Spring is watching you)
-  % proxy
-
-  \frame{\frametitle{Homework}
-      %CodeBean, CodeListLoader#load()#getCodeBeans()
-      DBCodeBeanListLoader vs MappedCodeBeanListLoader
+  \frame{\frametitle{AOP原理}
+    \verbatiminput{../aop-pojo.java}
   }
+
+  \frame{\frametitle{AOP原理-直接调用}
+    \verbatiminput{../aop-pojo-call.java}
+
+    \begin{center}
+      \includegraphics[width=0.7\textwidth]{../aop-proxy-plain-pojo-call.png}
+    \end{center}
+  }
+
+  \frame{\frametitle{AOP原理-Proxy调用}
+    \verbatiminput{../aop-pojo-proxy-call.java}
+
+    \begin{center}
+      \includegraphics[width=0.7\textwidth]{../aop-proxy-call.png}
+    \end{center}
+  }
+
+  \frame{\frametitle{使用场景}
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{../aop-usage.png}
+    \end{center}
+  }
+
+
+  %% \frame{\frametitle{Homework}
+  %%   %CodeBean, CodeListLoader#load()#getCodeBeans()
+  %%   DBCodeBeanListLoader vs MappedCodeBeanListLoader
+  %% }
 
   \frame{\frametitle{推荐资料}
 
     \begin{itemize}
 
-      \item \href{http://www.jdon.com/designpatterns/}{Design Pattern}
-      \item \href{http://www.tutorialspoint.com/spring/index.htm}{Spring Tutorial}
-      \item \href{http://book.douban.com/subject/1426848/}{Expert One-on-One J2EE Development without EJB}
-        \includegraphics[width=0.3\textwidth]{expert_one_on_one.jpg}
+    \item \href{http://www.jdon.com/designpatterns/}{Design Pattern}
+    \item \href{http://www.tutorialspoint.com/spring/index.htm}{Spring Tutorial}
+    \item \href{http://book.douban.com/subject/1426848/}{Expert One-on-One J2EE Development without EJB}
+      \includegraphics[width=0.3\textwidth]{../expert_one_on_one.jpg}
     \end{itemize}
   }
-
 
   \bgroup
   \usenavigationsymbolstemplate{}
   \setbeamercolor{background canvas}{bg=black}
   \frame[plain]{
     \begin{center}
-      \includegraphics[width=0.8\textwidth]{continue.jpg}
+      \includegraphics[width=0.8\textwidth]{../continue.jpg}
     \end{center}
   }
   \egroup

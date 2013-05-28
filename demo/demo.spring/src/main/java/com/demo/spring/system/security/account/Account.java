@@ -1,4 +1,4 @@
-package com.demo.spring.security.account;
+package com.demo.spring.system.security.account;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +10,15 @@ public class Account {
     private String password;
 
     private Date created;
+
+    public Account() {
+    }
+
+    public Account(String name, String password, Date created) {
+        this.name = name;
+        this.password = password;
+        this.created = created;
+    }
 
     public String getName() {
         return name;

@@ -1,4 +1,4 @@
-package com.demo.spring.security.filter;
+package com.demo.spring.system.security.filter;
 
 public interface SecurityFilter<T> {
 

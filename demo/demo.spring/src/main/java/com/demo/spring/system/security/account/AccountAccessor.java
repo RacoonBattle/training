@@ -1,4 +1,4 @@
-package com.demo.spring.security.account;
+package com.demo.spring.system.security.account;
 
 public interface AccountAccessor {
 
