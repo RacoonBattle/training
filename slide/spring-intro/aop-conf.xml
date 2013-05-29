@@ -1,0 +1,11 @@
+<aop:config proxy-target-class="true">
+    <aop:pointcut
+        id="methodLogPoint"
+        expression="@annotation(com.demo.spring.aop.MethodLog)" />
+
+    <aop:advisor
+		id="methodLogAdvisor"
+		advice-ref="methodLogAdvice"
+		pointcut-ref="methodLogPoint" />
+</aop:config>
+
