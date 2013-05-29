@@ -1,7 +1,6 @@
-package com.demo.java.annotation;
+package com.demo.spring.aop;
 
 public interface Hello {
 
-    @MethodLog
     void sayHello(String name);
 }

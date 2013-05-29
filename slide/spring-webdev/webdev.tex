@@ -23,21 +23,65 @@
   % title page 
   \frame{\titlepage}
 
-  % outline
-  \frame{\frametitle{Outline}
+  \frame{\frametitle{内容}
     \begin{itemize}
       \item Spring Jdbc
-      \item Listener/Servlet/Filter
-      \item Spring WebMVC
+      \item Listener, Filter, Servlet
+      \item Model-View-Controller
+      \item Spring Web
     \end{itemize}
   }
 
-  % Aspect (Big Spring is watching you)
-  % proxy
+  \frame{\frametitle{目标}
+    \begin{itemize}
+      \item 理解MVC
+      \item 能够使用SpringJdbc及事务
+      \item 能够使用Spring构建Web应用
+    \end{itemize}
+  }
+
+  \frame{\frametitle{Spring Framework}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{../spring_framework.png}
+    \end{center}
+  }
+
+  \frame{\frametitle{Spring Jdbc}
+  }
+
+  \frame{\frametitle{MVC}
+  }
+
+  \frame{\frametitle{Spring webmvc}
+  }
+
+  \frame{\frametitle{ContextLoaderListener}
+  }
+
+  \frame{\frametitle{DispatchServlet}
+  }
+
+  \frame{\frametitle{元素}
+    \begin{itemize}
+    \item WebApplicationContext
+    \item HandlerMapping
+    \item HandlerAdapter
+    \item Controller
+    \item ModelAndView
+    \item ViewResolver
+    \item ExceptionResolver
+    \end{itemize}
+  }
+
+  \frame{\frametitle{启动过程}
+      \includegraphics[width=1.1\textwidth]{../spring_init.png}
+  }
+
+  % validator
+  % locale, message
+  % quartz
 
   \frame{\frametitle{Homework}
-      %CodeBean, CodeListLoader#load()#getCodeBeans()
-      DBCodeBeanListLoader vs MappedCodeBeanListLoader
   }
 
   \frame[plain]{
