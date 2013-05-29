@@ -1,0 +1,13 @@
+<bean id="dataSource"
+      class="xxxx.xxx.xxx">
+  <property name="driverClassName" value="xx"/>
+  ...
+</bean>
+
+<bean id="jdbcTemplate"
+      class="org.springframework.jdbc.core.JdbcTemplate">
+  <property name="dataSource" ref="dataSource" />
+</bean>
+
+@Resource
+private JdbcTemplate jdbcTemplate;
