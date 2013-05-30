@@ -11,7 +11,7 @@ public abstract class AbstractAccountAccessor implements AccountAccessor {
 
     protected Logger logger = LoggerFactory.getLogger(MappedAccountAccessor.class);
 
-    @Resource
+    @Resource(name="securityFilter")
     protected SecurityFilter<Account> securityFilter;
 
     public void init() {

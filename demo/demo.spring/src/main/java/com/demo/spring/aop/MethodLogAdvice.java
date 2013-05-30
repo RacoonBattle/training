@@ -10,12 +10,12 @@ public class MethodLogAdvice implements MethodBeforeAdvice, AfterReturningAdvice
 
     @Override
     public void before(Method method, Object[] args, Object target) throws Throwable {
-        String value = method.getAnnotation(MethodLog.class).value();
+        MethodLog methodLog = method.getAnnotation(MethodLog.class);
 
-        if (StringUtils.hasText(value)) {
-            System.out.println(value + " Begin.");
+        if (methodLog != null && StringUtils.hasText(methodLog.value())) {
+            System.out.println(methodLog.value() + " Begin.");
         } else {
-            System.out.println(value + " Begin.");
+            System.out.println(method.getName() + " Begin.");
         }
     }
 

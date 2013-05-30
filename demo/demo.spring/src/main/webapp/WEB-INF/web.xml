@@ -7,7 +7,8 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:spring/service.xml,
+            classpath:spring/dao.xml,
+            classpath:spring/service-annotation.xml,
         </param-value>
     </context-param>
 

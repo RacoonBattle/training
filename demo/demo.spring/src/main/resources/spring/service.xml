@@ -12,9 +12,6 @@
         <constructor-arg value="123456" />
         <constructor-arg ref="created" />
     </bean>
-    <util:map id="accountMap">
-        <entry key="alice" value-ref="alice" />
-    </util:map>
 
     <bean id="passwordFilter" class="com.demo.spring.system.security.filter.PasswordSecurityFilter" />
 
@@ -23,6 +20,8 @@
     </bean>
 
     <bean id="accountAccessor" class="com.demo.spring.system.security.account.MappedAccountAccessor" parent="abstractAccessor">
-        <property name="accountMap" ref="accountMap" />
+        <map>
+            <entry key="alice" value-ref="alice" />
+        </map>
     </bean>
 </beans>
