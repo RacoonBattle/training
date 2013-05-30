@@ -6,12 +6,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="created" class="java.util.Date" />
-    <bean id="alice" class="com.demo.spring.system.security.account.Account">
-        <constructor-arg value="alice" />
-        <constructor-arg value="123456" />
-        <constructor-arg ref="created" />
-    </bean>
+    <import resource="mapped-account.xml" />
 
     <bean id="passwordFilter" class="com.demo.spring.system.security.filter.PasswordSecurityFilter" />
 
