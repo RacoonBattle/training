@@ -5,14 +5,15 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.demo.spring.system.security.filter.NonSecurityFilter;
 import com.demo.spring.system.security.filter.SecurityFilter;
 
 public abstract class AbstractAccountAccessor implements AccountAccessor {
 
     protected Logger logger = LoggerFactory.getLogger(MappedAccountAccessor.class);
 
-    @Resource(name="securityFilter")
-    protected SecurityFilter<Account> securityFilter;
+    @Resource
+    protected SecurityFilter<Account> securityFilter = new NonSecurityFilter();
 
     public void init() {
 
