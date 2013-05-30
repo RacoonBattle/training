@@ -1,7 +1,11 @@
-1. create schema
+### create schema
 
     script/sql/ddl/account.ddl
 
-2. startup, open a terminal and execute
+### database configuration
+
+    src/main/resources.local/system.properties
+
+### startup, open a terminal and execute
 
     mvn jetty:run (or make run in linux for short)
