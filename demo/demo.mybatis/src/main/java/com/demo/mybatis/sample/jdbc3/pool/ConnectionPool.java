@@ -19,7 +19,7 @@ public class ConnectionPool implements ResourcePool<Connection> {
 
 		// TODO Start a timer
 
-		String url = "jdbc:mysql://localhost:3306/test?user=root&password=";
+		String url = "jdbc:mysql://localhost:3306/test?user=root&password=root";
 
 		try {
 			return DriverManager.getConnection(url);

@@ -15,7 +15,7 @@ public class SQLHelper {
 	}
 
 	public static Connection getConnection() {
-		String url = "jdbc:mysql://localhost:3306/test?user=root&password=";
+		String url = "jdbc:mysql://localhost:3306/test?user=root&password=root";
 
 		try {
 			return DriverManager.getConnection(url);

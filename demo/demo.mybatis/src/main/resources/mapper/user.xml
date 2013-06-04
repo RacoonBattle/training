@@ -33,7 +33,7 @@
     <!-- selectCount -->
 
     <insert id="insert"
-    			parameterType="com.demo.mybatis.sample.bean.User"
+    		parameterType="com.demo.mybatis.sample.bean.User"
             keyProperty="id">
         <![CDATA[
             insert into users (

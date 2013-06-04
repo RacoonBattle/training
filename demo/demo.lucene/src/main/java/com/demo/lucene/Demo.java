@@ -1,14 +1,16 @@
 package com.demo.lucene;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
@@ -18,72 +20,79 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 
 public class Demo {
 
-    static Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_43);
-    static IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_43, analyzer);
+    public static void main(String[] args) throws IOException {
+        Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_43);
+        TokenStream ts = analyzer.tokenStream("content", new StringReader("the fox jump over the lazy dog"));
+        OffsetAttribute attribute = ts.addAttribute(OffsetAttribute.class);
 
-    public static void main(String[] args) throws IOException, ParseException {
+        ts.reset();
+        while (ts.incrementToken()) {
+            System.out.println(ts.reflectAsString(true));
+            System.out.println(attribute.startOffset() + "-" + attribute.endOffset());
 
-        //doIndex();
-        doSearch("lisp");
+        }
+        ts.end();
+        ts.close();
     }
 
-    static void doSearch(String keyword) throws IOException, ParseException {
-        IndexReader reader = DirectoryReader.open(FSDirectory.open(new File("data/output")));
+    public static void indexAndSearch() throws IOException, ParseException {
+
+        String intput = "/home/tom/Desktop/lucene-4.3.0/docs";
+        String output = "data/output";
+
+        String keyword = "lucene";
+
+        // store
+        Directory directory = new RAMDirectory();
+
+        Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_43);
+
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_43, analyzer);
+        config.setOpenMode(OpenMode.CREATE_OR_APPEND);
+
+        // index
+        IndexWriter writer = new IndexWriter(directory, config);
+        for (File file : new File(intput).listFiles(new FileFilter() {
+
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().endsWith(".html");
+            }
+        })) {
+            Document doc = new Document();
+            doc.add(new StringField("path", file.getAbsolutePath(), Store.YES));
+            doc.add(new LongField("modified", file.lastModified(), Store.YES));
+            doc.add(new TextField("content", new FileReader(file)));
+
+            writer.addDocument(doc);
+        }
+        writer.close();
+
+        // search
+        IndexReader reader = DirectoryReader.open(directory);
         IndexSearcher searcher = new IndexSearcher(reader);
 
         QueryParser parser = new QueryParser(Version.LUCENE_43, "content", analyzer);
         Query query = parser.parse(keyword);
-        System.out.println("query:" + query.toString("content"));
+        System.out.println(query.toString("content"));
 
-        TopDocs docs = searcher.search(query, 10);
-
-        for (ScoreDoc doc : docs.scoreDocs) {
-
+        for (ScoreDoc doc : searcher.search(query, 10).scoreDocs) {
             Document document = searcher.doc(doc.doc);
-
-            System.out.println("path:" + document.getField("path").stringValue());
-            //System.out.println("modified:" + document.getField("modified").stringValue());
-            //System.out.println("content:" + document.getField("content").stringValue());
+            System.out.println(document.get("path"));
+            System.out.println(document.get("modified"));
+            System.out.println(document.get("content"));
         }
-
         reader.close();
-    }
-
-    static void doIndex() throws IOException {
-
-        config.setOpenMode(OpenMode.CREATE);
-
-        IndexWriter writer = new IndexWriter(FSDirectory.open(new File("data/output")), config);
-
-        File[] files = new File("data/input").listFiles();
-        for (File file : files) {
-            indexFile(writer, file);
-        }
-
-        writer.close();
-    }
-
-    static void indexFile(IndexWriter writer, File file) throws IOException {
-
-        Document doc = new Document();
-
-        Field pathField = new StringField("path", file.getPath(), Store.YES);
-        doc.add(pathField);
-        doc.add(new LongField("modified", file.lastModified(), Store.NO));
-        doc.add(new TextField("content", new BufferedReader(new FileReader(file))));
-
-        writer.updateDocument(new Term("path", file.getPath()), doc);
     }
 }
