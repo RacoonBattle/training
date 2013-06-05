@@ -33,6 +33,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>authenticationControlFilter</filter-name>
+        <filter-class>com.demo.spring.web.filter.AuthenticationControlFilter</filter-class>
+    </filter>
+    <!-- 
+    <filter-mapping>
+        <filter-name>authenticationControlFilter</filter-name>
+        <url-pattern>*.htm</url-pattern>
+    </filter-mapping>
+    -->
+
     <servlet>
         <servlet-name>web</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

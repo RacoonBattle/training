@@ -54,6 +54,6 @@
     </bean>
 
     <!-- 加载controller -->
-    <context:component-scan base-package="com.demo.mybatis.sample.controller" />
+    <context:component-scan base-package="com.demo.mybatis.controller" />
     <mvc:annotation-driven />
 </beans>

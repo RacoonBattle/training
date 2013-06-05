@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.demo.mybatis.sample.bean.User;
+import com.demo.mybatis.sample.bean.Account;
 
 public class Client {
 
@@ -19,18 +19,18 @@ public class Client {
 		 // param.put("id", 1);
 
 		 
-		 User user = session.selectOne("user.select",
-				 User.class,
+		 Account user = session.selectOne("user.select",
+				 Account.class,
 				 param);
 		 
 		 
-		 List<User> users = session.selectList(
+		 List<Account> users = session.selectList(
 				 "select id, name from users",
-				 User.class);
+				 Account.class);
 		 
-		 List<User> users2 = session.selectList(
+		 List<Account> users2 = session.selectList(
 				 "select id, name from users where birth=?",
-				 User.class,
+				 Account.class,
 				 "2010-01-01");
 	}
 }

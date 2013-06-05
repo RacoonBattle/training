@@ -22,7 +22,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mapper/user.xml" />
+		<mapper resource="mapper/account.xml" />
 		<!--mapper resource="mapper/role.xml" /-->
 	</mappers>
 

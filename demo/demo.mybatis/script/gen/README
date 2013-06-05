@@ -1,0 +1,70 @@
+目的: 根据数据库，输出所有表的JavaBean和mybatis配置文件，如:
+create database test;
+create table user (
+    id int auto_increment not null comment '用户编号',
+    name varchar(8) not null comment '用户名',
+    create_ts long not null comment '创建时间',
+    primary key(id)
+) comment '用户信息';
+
+NOTE:
+1, 脚本需要apt安装python-mysqldb(非linux用户可以在virtualenv中通过pip install MySQL-python)
+2, 默认数据库使用下划线命名风格，Java使用驼峰式风格
+
+执行附件python mybatis-mapper.py
+tom@debian:~/Desktop$ python mybatis-mapper.py
+Database Server: localhost
+User: root
+Password: root
+Choose a database:
+
+information_schema
+mysql
+test
+
+Enter choice: test
+Enter package: com.qunar.sample.bean
+Enter author: zhongyuan.zhang
+tom@debian:~/Desktop$ 
+
+生成User.java, user.xml
+
+效果如下
+----------------------------------------------------------------------
+/*
+ * $Id$
+ *
+ * Copyright (c) 2011 Qunar.com. All Rights Reserved.
+ */
+package com.qunar.sample.bean;
+
+/**
+ * 用户信息
+ *
+ * @author zhongyuan.zhang
+ */
+public class User {
+
+    /**
+     * 用户编号
+     */
+    private Integer id;
+
+    /**
+     * 用户名
+     */
+    private String name;
+
+    /**
+     * 创建时间
+     */
+    private String createTs;
+
+    /**
+     * 获取用户编号
+     * 
+     * @return 用户编号
+     */
+    public Integer getId() {
+        return id;
+    }

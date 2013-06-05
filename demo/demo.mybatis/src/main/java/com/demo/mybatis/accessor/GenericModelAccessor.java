@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.mybatis.accessor.bean.ListQuery;
@@ -60,18 +61,18 @@ public class GenericModelAccessor<T> extends AbstractModelAccessor implements Mo
         Integer maxCount = query.getMaxCount();
 
         if (startIndex == null && maxCount == null) {
-            return queryDAO.executeForObjectList(sqlId, query);
+            return sqlSession.selectList(sqlId, query);
         }
 
         startIndex = (startIndex == null || startIndex < this.startIndex) ? this.startIndex : startIndex.intValue();
         maxCount = (maxCount == null || maxCount > this.maxCount || maxCount <= 0) ? this.maxCount : maxCount.intValue();
 
-        return queryDAO.executeForObjectList(sqlId, query, startIndex, maxCount);
+        return sqlSession.selectList(sqlId, query, new RowBounds(startIndex, maxCount));
     }
 
     @Override
     public int selectCount(Query query) {
-        return queryDAO.executeForObject(SQL_SELECT_COUNT, query, Integer.class);
+        return sqlSession.selectOne(SQL_SELECT_COUNT, query);
     }
 
     @Override
@@ -94,7 +95,7 @@ public class GenericModelAccessor<T> extends AbstractModelAccessor implements Mo
             return 0;
         }
 
-        return updateDAO.execute(SQL_INSERT, object);
+        return sqlSession.update(SQL_INSERT, object);
     }
 
     @Override
@@ -116,12 +117,12 @@ public class GenericModelAccessor<T> extends AbstractModelAccessor implements Mo
 
     @Override
     public int update(T object) {
-        return updateDAO.execute(SQL_UDPATE, object);
+        return sqlSession.update(SQL_UDPATE, object);
     }
 
     @Override
     public int delete(int id) {
-        return updateDAO.execute(SQL_DELETE, id);
+        return sqlSession.update(SQL_DELETE, id);
     }
 
 }

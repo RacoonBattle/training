@@ -7,30 +7,30 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.demo.mybatis.sample.bean.User;
+import com.demo.mybatis.sample.bean.Account;
 
 public class Client {
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
-		UserAccessor accessor = getUserAccessor();
-		
-		//User user = accessor.getUser("frank");
-		User user = accessor.getUser(1);
-		
-		System.out.println(user);
-	}
+        AccountAccessor accessor = getUserAccessor();
 
-	static UserAccessor getUserAccessor() throws IOException {
+        // Account account = accessor.getAccount("frank");
+        Account account = accessor.getAccount(1);
 
-		String config = "mybatis-config-standalone.xml";
-		InputStream inputStream = Resources.getResourceAsStream(config);
-		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        System.out.println(account);
+    }
 
-		UserAccessorImpl accessor = new UserAccessorImpl();
-		accessor.setSqlSession(sessionFactory.openSession());
-		// TODO session.close();
+    static AccountAccessor getUserAccessor() throws IOException {
 
-		return accessor;
-	}
+        String config = "mybatis-config-standalone.xml";
+        InputStream inputStream = Resources.getResourceAsStream(config);
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        AccountAccessorImpl accessor = new AccountAccessorImpl();
+        accessor.setSqlSession(sessionFactory.openSession());
+        // TODO session.close();
+
+        return accessor;
+    }
 }

@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.demo.mybatis.sample.bean.Role;
-import com.demo.mybatis.sample.bean.User;
+import com.demo.mybatis.sample.bean.Account;
 
 public class Insert {
 
@@ -23,7 +23,7 @@ public class Insert {
 		SqlSession session = sessionFactory.openSession();
 
 		// Build query parameter
-		User user = new User();
+		Account user = new Account();
 		user.setName("frank3");
 		user.setRole(Role.MANAGER);
 

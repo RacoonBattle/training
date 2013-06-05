@@ -8,5 +8,17 @@
 
     <import resource="mapped-account.xml" />
 
+    <bean id="authenticationController" class="com.demo.spring.web.filter.SimpleAuthenticationController">
+        <property name="noCheckRequiredPaths">
+            <list>
+                <value>/</value>
+                <value>/home.htm</value>
+                <value>/login.htm</value>
+                <value>/logout.htm</value>
+                <value>/nonSecurity.htm</value>
+            </list>
+        </property>
+    </bean>
+
     <context:component-scan base-package="com.demo.spring.system" />
 </beans>

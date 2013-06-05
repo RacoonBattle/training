@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.demo.mybatis.sample.bean.User;
+import com.demo.mybatis.sample.bean.Account;
 import com.demo.mybatis.sample.jdbc3.handler.TypeHandler;
-import com.demo.mybatis.sample.jdbc3.handler.UserHandler;
+import com.demo.mybatis.sample.jdbc3.handler.AccountHandler;
 import com.demo.mybatis.sample.jdbc3.pool.ConnectionPool;
 import com.demo.mybatis.sample.jdbc3.pool.ResourcePool;
 
@@ -14,25 +14,25 @@ public class Client {
 
 	public static void main(String[] args) {
 
-		UserDAO dao = getUserDAO();
+		AccountAccessor accessor = getUserDAO();
 
-		User user = dao.getUserByName("alice");
+		Account user = accessor.getAccountByName("steve");
 
 		System.out.println(user);
 	}
 
-	static UserDAO getUserDAO() {
+	static AccountAccessor getUserDAO() {
 
 		ResourcePool<Connection> pool = new ConnectionPool();
 
 		Map<Class<?>, TypeHandler<?>> converterMap = new HashMap<Class<?>, TypeHandler<?>>();
-		converterMap.put(User.class, new UserHandler());
+		converterMap.put(Account.class, new AccountHandler());
 		// converterMap.put(User.class, new BeanConverter<User>(User.class));
 
-		UserDAOImpl dao = new UserDAOImpl();
-		dao.setConverterMap(converterMap);
-		dao.setPool(pool);
+		AccountAccessorImpl accessor = new AccountAccessorImpl();
+		accessor.setConverterMap(converterMap);
+		accessor.setPool(pool);
 
-		return dao;
+		return accessor;
 	}
 }

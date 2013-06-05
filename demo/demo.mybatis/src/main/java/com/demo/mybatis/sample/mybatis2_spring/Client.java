@@ -8,9 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.demo.mybatis.accessor.ModelAccessor;
-import com.demo.mybatis.accessor.bean.GenericQuery;
-import com.demo.mybatis.sample.bean.User;
+import com.demo.mybatis.sample.bean.Account;
 
 public class Client {
 
@@ -27,7 +25,7 @@ public class Client {
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 		params.put("name", "frank");
 
-		User user = session.selectOne("user.select", params);
+		Account user = session.selectOne("account.select", params);
 		System.out.println(user);
 
 		// Close session
