@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="accountLog">
+	
+    <select id="select"
+            parameterType="java.util.HashMap"
+            resultType="com.demo.mybatis.sample.bean.AccountLog">
+        <![CDATA[
+            select
+                id,
+                account_id as accountId,
+                field
+            from 
+                account_log
+        ]]>
+        <where>
+            <if test="accountId !=null">
+                and account_id = #{accountId}
+            </if>
+        </where>
+    </select>
+</mapper>

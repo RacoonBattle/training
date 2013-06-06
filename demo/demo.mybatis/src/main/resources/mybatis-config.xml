@@ -21,6 +21,7 @@
 
     <mappers>
         <mapper resource="mapper/account.xml" />
+        <mapper resource="mapper/accountLog.xml" />
     </mappers>
 
 </configuration> 
