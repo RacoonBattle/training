@@ -118,7 +118,7 @@ class Table(object):
         o.write('/*\n')
         o.write(' * $Id$\n')
         o.write(' *\n')
-        o.write(' * Copyright (c) 2011 Qunar.com. All Rights Reserved.\n')
+        o.write(' * Copyright (c) 2011 demo.com. All Rights Reserved.\n')
         o.write(' */\n')
         if package:
             o.write('package ' + package + ';\n')
