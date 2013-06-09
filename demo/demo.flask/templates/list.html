@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<a href="create">Create</a>
+
+<table>
+  {% for u in users %}
+  <tr><td>{{u.id}}</td><td>{{u.name}}</td><td>{{u.fullname}}</td></tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
