@@ -10,8 +10,19 @@
     <context:property-placeholder location="classpath:system.properties" ignore-unresolvable="true" />
 
     <!-- =================================================== 数据源 -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="abstractPoolDatatSource" abstract="true" class="org.apache.tomcat.jdbc.pool.DataSource"
+        destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="maxActive" value="20" />
+        <property name="maxIdle" value="20" />
+        <property name="maxWait" value="3000" />
+        <property name="validationQuery" value="select 1" />
+        <property name="validationInterval" value="30000" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testWhileIdle" value="true" />
+    </bean>
+
+    <bean id="dataSource" parent="abstractPoolDatatSource">
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
