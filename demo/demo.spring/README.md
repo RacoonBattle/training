@@ -1,6 +1,6 @@
-### create schema
+### schema
 
-    script/sql/ddl/account.ddl
+    src/main/resources/schema_h2.ddl
 
 ### database configuration
 
