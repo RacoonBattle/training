@@ -9,46 +9,18 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>text/html;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-                <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
-                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
-            </list>
-        </property>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
     </bean>
-
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="mediaTypes">
-            <map>
-                <entry key="html" value="text/html" />
-                <entry key="json" value="application/json" />
-            </map>
-        </property>
-        <property name="viewResolvers">
-            <list>
-                <bean id="jspViewResolver"
-                    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                    <property name="viewClass"
-                        value="org.springframework.web.servlet.view.JstlView" />
-                    <property name="prefix" value="/WEB-INF/jsp/" />
-                    <property name="suffix" value=".jsp" />
-                </bean>
-            </list>
-        </property>
-        <property name="defaultViews">
-            <list>
-                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-            </list>
+    
+    <bean class="com.demo.spring.web.servlet.handler.SimpleMappingExceptionResolverEx">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.sql.SQLException">error/sql</prop>
+                <prop key="java.sql.IOException">error/io</prop>
+            </props>
         </property>
     </bean>
 
